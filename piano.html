@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        ul{list-style:none;}
+        nav{
+            width: 800px;
+            height:35px;
+            border:1px solid #ccc;
+            margin: 100px auto;
+        }
+        nav li{
+            width: 99px;
+            height:35px;
+            background-color: rgba(200, 200, 200, .4);
+            border-right:1px dashed #ccc;
+            float:left;
+            text-align: center;
+            line-height: 35px;
+            position: relative;
+            overflow: hidden;
+        }
+        nav li ins{
+            position: absolute;
+            top:35px;
+            left:0;
+            width:100%;
+            height:100%;
+            background-color: pink;
+            z-index: -1;
+        }
+    </style>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script>
+        $(function() {
+            $("ul > li").append('<ins></ins>');
+            var arr = ["skyblue", "navy", "gray", "yellowgreen", "green", "pink", "purple", "orange"]
+            $("ul > li").each(function(index, element) {
+                $(element).find('ins').css("backgroundColor", arr[index])
+            });
+
+            $("ul > li").mouseenter(function() {
+                $(this).find('ins').stop().animate({"top" : 0}, 200)
+                $("audio").get($(this).index()).load();
+                $("audio").get($(this).index()).play();
+            });
+            $("ul > li").mouseleave(function(event) {
+                $(this).find('ins').stop().animate({"top" : "35px"}, 200)
+            });
+
+
+            $(window).keydown(function(event) {
+                var num = event.keyCode - 49;
+                $("ul > li").eq(num).trigger('mouseenter');
+                setTimeout(function() {
+                    $("ul > li").eq(num).trigger('mouseleave');
+                }, 300)
+            });
+        })
+    </script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li>1-one</li>
+        <li>2-two</li>
+        <li>3-three</li>
+        <li>4-four</li>
+        <li>5-five</li>
+        <li>6-six</li>
+        <li>7-seven</li>
+        <li>8-eight</li>
+    </ul>
+</nav>
+<audio src="music/1.ogg"></audio>
+<audio src="music/2.ogg"></audio>
+<audio src="music/3.ogg"></audio>
+<audio src="music/4.ogg"></audio>
+<audio src="music/5.ogg"></audio>
+<audio src="music/6.ogg"></audio>
+<audio src="music/7.ogg"></audio>
+<audio src="music/8.ogg"></audio>
+</body>
+</html>
